@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增任务</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 30px; }
+        .form-container { width: 400px; margin: 0 auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        .error-msg { color: red; font-size: 14px; margin-bottom: 10px; }
+        input[type="text"] { width: 100%; padding: 8px; margin: 10px 0; box-sizing: border-box; }
+        button { padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h3>新增任务</h3>
+    <!-- 校验错误提示回显 -->
+    <div class="error-msg" th:if="${errorMsg}" th:text="${errorMsg}"></div>
+
+    <form th:action="@{/tasks/add}" method="post">
+        <label>任务标题：</label>
+        <!-- 回显用户刚才输入的值 -->
+        <input type="text" name="title" th:value="${task.title}" placeholder="请输入任务标题">
+        <button type="submit">提交保存</button>
+        <a th:href="@{/tasks}" style="margin-left: 10px;">返回列表</a>
+    </form>
+</div>
+</body>
+</html>

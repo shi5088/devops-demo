@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskMaster 任务列表</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { border-collapse: collapse; width: 70%; margin: 20px auto; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background-color: #f4f4f4; }
+        .pagination { text-align: center; margin-top: 20px; }
+        /* 新增按钮样式 */
+        .btn-add {
+            display: inline-block; padding: 10px 20px; background-color: #2ecc71;
+            color: white; text-decoration: none; border-radius: 5px; font-weight: bold;
+        }
+        .btn-add:hover { background-color: #27ae60; }
+    </style>
+</head>
+<body>
+<h2 style="text-align: center;">任务列表 (未完成)</h2>
+
+<!-- 把新增按钮放在表格上方，更符合操作习惯 -->
+<div style="text-align: center; margin-bottom: 10px;">
+    <a th:href="@{/tasks/add}" class="btn-add">+ 新增任务</a>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>任务标题</th>
+        <th>状态</th>
+        <th>创建时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- th:each 循环遍历后端传来的 page.records -->
+    <tr th:each="task : ${page.records}">
+        <td th:text="${task.id}">1</td>
+        <td th:text="${task.title}">示例任务</td>
+        <!-- 判断状态 -->
+        <td th:if="${task.status == 0}" style="color: #e74c3c;">待办</td>
+        <td th:if="${task.status == 1}" style="color: #2ecc71;">已完成</td>
+        <td th:text="${task.createTime}">2026-10-29</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- 分页控制 -->
+<div class="pagination">
+    <a th:href="@{/tasks(pageNum=${page.current - 1})}" th:if="${page.current > 1}">上一页</a>
+    <span> 当前第 <b th:text="${page.current}"></b> 页 / 共 <b th:text="${page.pages}"></b> 页 </span>
+    <a th:href="@{/tasks(pageNum=${page.current + 1})}" th:if="${page.current < page.pages}">下一页</a>
+</div>
+</body>
+</html>

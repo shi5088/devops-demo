@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 连接刚才建好的 taskmaster 数据库
+    url: jdbc:mysql://localhost:3306/taskmaster?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  thymeleaf:
+    cache: false # 开发时关缓存，改页面立即生效
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # 在控制台打印 SQL，这对于排查问题非常重要（解决封装带来的“SQL不可见”）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true # 数据库 create_time 自动映射 Java 的 createTime

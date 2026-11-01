@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录 - TaskMaster</title>
+</head>
+<body>
+<h3>系统登录</h3>
+<p style="color:red;" th:if="${param.error}">用户名或密码错误</p>
+<p style="color:red;" th:if="${param.needLogin}">您还未登录，已被拦截器强制重定向！</p>
+<form th:action="@{/doLogin}" method="post">
+    账号：<input type="text" name="username"><br><br>
+    密码：<input type="password" name="password"><br><br>
+    <button type="submit">登录</button>
+</form>
+</body>
+</html>
